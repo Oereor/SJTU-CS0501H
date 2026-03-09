@@ -10,4 +10,5 @@ add_executable(linear_lists main.cpp
         ArrayList.cpp
         ArrayList.h
         LinkedList.cpp
-        LinkedList.h)
+        LinkedList.h
+        hw01.cpp)

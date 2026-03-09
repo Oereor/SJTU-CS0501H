@@ -1,5 +1,5 @@
 //
-// Created by AP3RTUR3 WH3ATL3Y on 2026/3/9.
+// Created by Oereor on 2026/3/9.
 //
 
 #include "LinkedList.h"
@@ -93,9 +93,54 @@ void LinkedList<Type>::insert(const int index, const Type &item) {
 }
 
 template<class Type>
+void LinkedList<Type>::insertFront(const Type &item) {
+    insert(m_Head, item);
+}
+
+template<class Type>
+void LinkedList<Type>::insertBack(const Type &item) {
+    insert(m_Tail->prev, item);
+}
+
+template<class Type>
 Type LinkedList<Type>::get(int index) const {
     if (index < 0 || index >= m_Size) {
         throw;
     }
     return getNode(index)->data;
+}
+
+template<class Type>
+bool LinkedList<Type>::remove(const Type &item) {
+    for (Node* curr = m_Head->next; curr != m_Tail; curr = curr->next) {
+        if (curr->data == item) {
+            remove(curr);
+            return true;
+        }
+    }
+    return false;
+}
+
+template<class Type>
+bool LinkedList<Type>::contains(const Type &item) const {
+    for (Node* curr = m_Head->next; curr != m_Tail; curr = curr->next) {
+        if (curr->data == item) {
+            return true;
+        }
+    }
+    return false;
+}
+
+template<class Type>
+int LinkedList<Type>::find(const Type &item) const {
+    int i = 0;
+    bool found = false;
+    for (Node* curr = m_Head->next; curr != m_Tail; curr = curr->next) {
+        if (curr->data == item) {
+            found = true;
+            break;
+        }
+        i++;
+    }
+    return found ? i : -1;
 }

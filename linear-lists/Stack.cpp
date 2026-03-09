@@ -1,5 +1,5 @@
 //
-// Created by AP3RTUR3 WH3ATL3Y on 2026/3/9.
+// Created by Oereor on 2026/3/9.
 //
 #include "Stack.h"
 

@@ -1,5 +1,5 @@
 //
-// Created by AP3RTUR3 WH3ATL3Y on 2026/3/9.
+// Created by Oereor on 2026/3/9.
 //
 
 #ifndef LINEAR_LISTS_LINKEDLIST_H
@@ -12,8 +12,10 @@ public:
     LinkedList();
     ~LinkedList() override;
     void clear() override;
-    int size() const override;
+    [[nodiscard]] int size() const override;
     void insert(int index, const Type& item) override;
+    void insertFront(const Type& item);
+    void insertBack(const Type& item);
     Type removeAt(int index) override;
     bool remove(const Type& item) override;
     bool contains(const Type& item) const override;
