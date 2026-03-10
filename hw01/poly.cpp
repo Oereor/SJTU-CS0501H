@@ -2,12 +2,13 @@
 // Created by Oereor on 2026-03-09.
 //
 
+#include <iostream>
+
 /**
  * 这个算法使用了双向链表, 计算加法时的时间复杂度为 O(n), 构造多项式的时间复杂度也为 O(n).
  * 储存多项式的空间复杂度为 O(n), 并只需使用常数的额外空间. 总的空间复杂度是 O(n).
+ * main() 函数中有简单的测试样例.
  */
-
-#include <iostream>
 
 /**
  * Assume the polynomial is stored by exponents ascending.
@@ -149,6 +150,7 @@ Polynomial Polynomial::fromTerms(int termCount, double coefficients[], int expon
     }
     return result;
 }
+
 
 int main() {
     double coeff1[6] = {1, 2, 3, 4, 5, 6}, coeff2[6] = {6, 5, 4, 3, 2, 1},
