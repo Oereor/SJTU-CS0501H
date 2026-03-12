@@ -55,10 +55,10 @@ LinkedList<Type>::Node *LinkedList<Type>::getNode(const int index) const {
 
 template<class Type>
 void LinkedList<Type>::insert(const Node *node, const Type& data) {
-    Node* nextNode = node->next;
-    Node* newNode = new Node(data, node, nextNode);
-    node->next = newNode;
-    nextNode->prev = newNode;
+    Node* prevNode = node->prev;
+    Node* newNode = new Node(data, prevNode, node);
+    prevNode->next = newNode;
+    node->prev = newNode;
     m_Size++;
 }
 
@@ -85,8 +85,12 @@ Type LinkedList<Type>::removeAt(const int index) {
 
 template<class Type>
 void LinkedList<Type>::insert(const int index, const Type &item) {
-    if (index < 0 || index >= m_Size) {
+    if (index < 0 || index > m_Size) {
         throw;
+    }
+    if (index == m_Size) {
+        insertBack(item);
+        return;
     }
     const Node* targetNode = getNode(index);
     insert(targetNode, item);
@@ -94,16 +98,16 @@ void LinkedList<Type>::insert(const int index, const Type &item) {
 
 template<class Type>
 void LinkedList<Type>::insertFront(const Type &item) {
-    insert(m_Head, item);
+    insert(m_Head->next, item);
 }
 
 template<class Type>
 void LinkedList<Type>::insertBack(const Type &item) {
-    insert(m_Tail->prev, item);
+    insert(m_Tail, item);
 }
 
 template<class Type>
-Type LinkedList<Type>::get(int index) const {
+Type LinkedList<Type>::get(const int index) const {
     if (index < 0 || index >= m_Size) {
         throw;
     }
