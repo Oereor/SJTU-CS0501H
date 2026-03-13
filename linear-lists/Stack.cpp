@@ -5,7 +5,9 @@
 
 template<class Type>
 Stack<Type>::Stack() {
-    this(DEFAULT_CAPACITY);
+    m_Capacity = DEFAULT_CAPACITY;
+    m_Items = new Type[m_Capacity];
+    m_Size = 0;
 }
 
 template<class Type>

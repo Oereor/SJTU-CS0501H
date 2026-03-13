@@ -15,7 +15,11 @@ ArrayDeque<Object>::ArrayDeque(const int capacity) {
 
 template<typename Object>
 ArrayDeque<Object>::ArrayDeque() {
-    this(DEFAULT_CAPACITY);
+    m_Capacity = DEFAULT_CAPACITY;
+    m_Items = new Object[m_Capacity];
+    m_Head = 0;
+    m_Tail = 0;
+    m_Size = 0;
 }
 
 template<typename Object>
