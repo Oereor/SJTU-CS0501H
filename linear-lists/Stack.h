@@ -10,10 +10,11 @@ class Stack {
 public:
     Stack();
     explicit Stack(int capacity);
-    int size() const;
+    [[nodiscard]] int size() const;
+    bool isEmpty() const;
     void push(const Type& item);
-    Type pop();
-    Type peek() const;
+    const Type& pop();
+    const Type& peek() const;
     void clear();
     ~Stack();
 

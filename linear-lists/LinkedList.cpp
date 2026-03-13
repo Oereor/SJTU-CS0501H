@@ -73,7 +73,7 @@ void LinkedList<Type>::remove(const Node *node) {
 }
 
 template<class Type>
-Type LinkedList<Type>::removeAt(const int index) {
+const Type& LinkedList<Type>::removeAt(const int index) {
     if (index < 0 || index >= m_Size) {
         throw;
     }
@@ -107,7 +107,7 @@ void LinkedList<Type>::insertBack(const Type &item) {
 }
 
 template<class Type>
-Type LinkedList<Type>::get(const int index) const {
+const Type& LinkedList<Type>::get(const int index) const {
     if (index < 0 || index >= m_Size) {
         throw;
     }

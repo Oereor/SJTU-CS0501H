@@ -35,7 +35,7 @@ void Stack<Type>::resize(const int targetCapacity) {
 }
 
 template<class Type>
-Type Stack<Type>::peek() const {
+const Type& Stack<Type>::peek() const {
     if (m_Size == 0) {
         throw;
     }
@@ -43,7 +43,7 @@ Type Stack<Type>::peek() const {
 }
 
 template<class Type>
-Type Stack<Type>::pop() {
+const Type& Stack<Type>::pop() {
     if (m_Size == 0) {
         throw;
     }
@@ -66,6 +66,11 @@ void Stack<Type>::checkCapacity() {
 template<class Type>
 int Stack<Type>::size() const {
     return m_Size;
+}
+
+template<class Type>
+bool Stack<Type>::isEmpty() const {
+    return m_Size == 0;
 }
 
 template<class Type>

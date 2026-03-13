@@ -9,7 +9,7 @@ template <class Type>
 class List {
 public:
     virtual ~List() = default;
-    virtual int size() const = 0;
+    [[nodiscard]] virtual int size() const = 0;
     virtual void insert(int index, const Type& item) = 0;
     virtual Type removeAt(int index) = 0;
     virtual bool remove(const Type& item) = 0;

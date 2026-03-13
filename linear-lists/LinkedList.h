@@ -16,11 +16,11 @@ public:
     void insert(int index, const Type& item) override;
     void insertFront(const Type& item);
     void insertBack(const Type& item);
-    Type removeAt(int index) override;
+    const Type& removeAt(int index) override;
     bool remove(const Type& item) override;
     bool contains(const Type& item) const override;
     int find(const Type& item) const override;
-    Type get(int index) const override;
+    const Type& get(int index) const override;
 private:
     struct Node {
         Type data;
