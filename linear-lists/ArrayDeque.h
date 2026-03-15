@@ -12,16 +12,17 @@ public:
     explicit ArrayDeque(int capacity);
     ~ArrayDeque();
     [[nodiscard]] int size() const;
-    bool isEmpty() const;
+    [[nodiscard]] bool isEmpty() const;
     void addFirst(const Object& item);
     void addLast(const Object& item);
-    const Object& removeFirst();
-    const Object& removeLast();
+    bool removeFirst();
+    bool removeLast();
     const Object& getFirst() const;
     const Object& getLast() const;
     void clear();
 private:
     static constexpr int DEFAULT_CAPACITY = 4;
+    static constexpr double SHRINK_THRESHOLD = 0.25;
     int m_Size;
     int m_Capacity;
     Object* m_Items;
@@ -29,8 +30,9 @@ private:
     void resize(int targetCapacity);
     void increasePointer(int& pointer) const;
     void decreasePointer(int& pointer) const;
-    int m_Head;
-    int m_Tail;
+    [[nodiscard]] int queueIndex(int index) const;
+    int m_Head; // points to the start of items
+    int m_Tail; // points to the place just after the last item
 };
 
 
