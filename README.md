@@ -8,3 +8,4 @@ Brief introduction for the assignments can be found in the following table.
 |:------:|:------:|
 | `hw01` | Two classes for adding up two polynomials and two big integers, respectively. |
 | `proj1` | Core logic of a simple 2048 game. |
+| `hw02` | An expression calculator. |
