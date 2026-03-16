@@ -284,5 +284,7 @@ private:
 
 int main() {
     const Calculator calc("5    * (7 -2* 3) + 8/    2");
-    std::cout << calc.result();
+    std::cout << calc.result() << std::endl;
+    const Calculator anotherCalc("8 * (11+234) / 1960");
+    std::cout << anotherCalc.result() << std::endl;
 }
