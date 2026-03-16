@@ -2,7 +2,7 @@
 #include <iostream>
 #include <vector>
 
-/************** Definitions of a stack ***************/
+/****************** Definitions of a stack *******************/
 template <class Type>
 class Stack {
 public:
