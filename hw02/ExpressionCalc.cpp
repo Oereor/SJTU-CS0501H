@@ -127,7 +127,7 @@ public:
 private:
     enum TokenType { NUMBER, OPERATOR };
 
-    enum Operator { ADD, SUB, MUL, DIV, POW, OPEN, CLOSE };
+    enum Operator { ADD, SUB, MUL, DIV, POW, OPENPAREN, CLOSEPAREN };
 
     struct Token {
         TokenType type;
@@ -153,13 +153,13 @@ private:
                 tokens.push_back(nextToken);
             }
             else if (nextToken.type == OPERATOR) {
-                if (auto op = static_cast<Operator>(nextToken.value); op == OPEN) { // open parentheses are pushed into the stack
+                if (auto op = static_cast<Operator>(nextToken.value); op == OPENPAREN) { // open parentheses are pushed into the stack
                     operators.push(op);
                 }
-                else if (op == CLOSE) { // pop operators until '(' is popped
+                else if (op == CLOSEPAREN) { // pop operators until '(' is popped
                     while (!operators.isEmpty()) {
                         const Operator o = operators.pop();
-                        if (o == OPEN) {
+                        if (o == OPENPAREN) {
                             break;
                         }
                         Token opToken(OPERATOR, o);
@@ -245,8 +245,8 @@ private:
             case '*': return MUL;
             case '/': return DIV;
             case '^': return POW;
-            case '(': return OPEN;
-            case ')': return CLOSE;
+            case '(': return OPENPAREN;
+            case ')': return CLOSEPAREN;
             default: throw;
         }
     }
