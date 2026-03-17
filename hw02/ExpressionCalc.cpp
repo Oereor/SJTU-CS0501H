@@ -1,4 +1,5 @@
 #include <cmath>
+#include <iomanip>
 #include <iostream>
 #include <vector>
 
@@ -139,7 +140,7 @@ private:
     };
 
     std::vector<Token> tokens;
-    double calcResult;
+    int calcResult;
 
     void scanExpression(const std::string& expression) {
         Stack<Operator> operators;
@@ -167,7 +168,7 @@ private:
                     }
                 }
                 else {
-                    while (!operators.isEmpty() && priority(operators.peek()) >= priority(op)) { // pop operators with higher priority
+                    while (!operators.isEmpty() && op != POW && priority(operators.peek()) >= priority(op)) { // pop operators with higher priority
                         Token highPriorityToken(OPERATOR, operators.pop());
                         tokens.push_back(highPriorityToken);
                     }
@@ -181,8 +182,8 @@ private:
         }
     }
 
-    [[nodiscard]] double calculate() const {
-        Stack<double> operands;
+    [[nodiscard]] int calculate() const {
+        Stack<int> operands;
         for (const Token token : tokens) {
             if (token.type == NUMBER) {
                 operands.push(token.value);
@@ -191,12 +192,12 @@ private:
                 if (operands.size() <= 1) {
                     throw;
                 }
-                const double num2 = operands.pop();
-                const double num1 = operands.pop(); // note that the operands are in reversed order
+                const int num2 = operands.pop();
+                const int num1 = operands.pop(); // note that the operands are in reversed order
                 operands.push(func(static_cast<Operator>(token.value), num1, num2));
             }
         }
-        const double result = operands.pop();
+        const int result = operands.pop();
         if (!operands.isEmpty()) {
             throw;
         }
@@ -262,13 +263,13 @@ private:
         }
     }
 
-    static double func(const Operator op, const double num1, const double num2) {
+    static int func(const Operator op, const int num1, const int num2) {
         switch (op) {
             case ADD: return num1 + num2;
             case SUB: return num1 - num2;
             case MUL: return num1 * num2;
             case DIV: return num1 / num2;
-            case POW: return pow(num1, num2);
+            case POW: return static_cast<int>(pow(num1, num2));
             default: return 0;
         }
     }
@@ -279,12 +280,12 @@ private:
  * 请统一使用 '(' ')', 不支持其他括号类型
  * 请勿在数字中间添加空格, 否则在扫描时将被截断
  * 可以在数字, 运算符以及括号之间添加任意数量的连续空格, 不影响扫描
- * 仅支持输入32位无符号整数计算, 但计算结果是双精度浮点数
+ * 仅支持输入32位无符号整数计算, 除法计算结果向下取整
  *******************************************************************************/
 
 int main() {
-    const Calculator calc("5    * (7 -2* 3) + 8/    2");
-    std::cout << calc.result() << std::endl;
-    const Calculator anotherCalc("8 * (11+234) / 1960");
-    std::cout << anotherCalc.result() << std::endl;
+    std::string expr;
+    std::cin >> expr;
+    const Calculator calc(expr);
+    std::cout << std::fixed << std::setprecision(0) << calc.result();
 }
