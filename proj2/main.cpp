@@ -156,8 +156,8 @@ int decideDirection() {
     }
 
     // 简单的 Manhattan 距离最小值，辅以 corner case 的优化。
-    // 更理想的算法可以是 heuristic search，但由于平台 C++ 解释器的限制，似乎难以实现 (?)
-    // 在平台上多次测试，蛇的最长长度平均大约为30。最佳纪录是42。
+    // 更理想的算法可以是 heuristic search，但由于平台 C++ 解释器的限制，似乎难以实现 (?) 而且 State space 的开销似乎也不小
+    // 在平台上多次测试，蛇的最长长度平均大约为30。
 
     int headX = getSnakeX(0);
     int headY = getSnakeY(0);
