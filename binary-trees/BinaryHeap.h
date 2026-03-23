@@ -11,8 +11,18 @@
 class BinaryHeap {
 public:
     BinaryHeap();
+    ~BinaryHeap();
     bool push(int item);
     int pop();
+    [[nodiscard]] int size() const;
+    [[nodiscard]] int peek() const;
+    void clear();
+private:
+    int* heap;
+    int m_Size;
+    void heapifyUp(int index);
+    void heapifyDown(int index);
+    void resize(int targetCapacity);
 };
 
 
