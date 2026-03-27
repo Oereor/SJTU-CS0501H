@@ -88,3 +88,27 @@ private:
         }
     }
 };
+
+class AStarSearchAgent {
+public:
+    AStarSearchAgent(const int foodX, const int foodY, std::unique_ptr<State> initialState) {
+        this->foodX = foodX;
+        this->foodY = foodY;
+        this->initState = std::move(initialState);
+        for (int i = 0; i < WIDTH; i++) {
+            for (int j = 0; j < HEIGHT; j++) {
+                pathTo[i][j] = -1;
+            }
+        }
+    }
+
+private:
+    int foodX;
+    int foodY;
+    int pathTo[WIDTH][HEIGHT];
+    std::unique_ptr<State> initState;
+
+    [[nodiscard]] bool isGoalState(const int x, const int y) const {
+        return x == foodX && y == foodY;
+    }
+};
