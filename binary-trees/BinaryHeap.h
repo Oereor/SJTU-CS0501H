@@ -13,22 +13,26 @@ public:
     BinaryHeap();
     explicit BinaryHeap(int capacity);
     ~BinaryHeap();
-    bool push(int item);
+    void push(int item);
     int pop();
     [[nodiscard]] int size() const;
+    [[nodiscard]] bool isEmpty() const;
     [[nodiscard]] int peek() const;
     void clear();
 private:
     static constexpr int DEFAULT_CAPACITY = 8;
-    static constexpr double SHRINK_THRESHOLD = 0.25;
+    /**
+     * m_Heap[0] will store the capacity.
+     */
     int* m_Heap;
     int m_Size;
-    void heapifyUp(int index);
-    void heapifyDown(int index);
+    int m_Capacity;
+    void heapifyUp(int index) const;
+    void heapifyDown(int index) const;
     void resize(int targetCapacity);
-    [[nodiscard]] int parent(int index) const;
-    [[nodiscard]] int leftChild(int index) const;
-    [[nodiscard]] int rightChild(int index) const;
+    [[nodiscard]] static int parent(int index);
+    [[nodiscard]] static int leftChild(int index);
+    [[nodiscard]] static int rightChild(int index);
 };
 
 
