@@ -22,7 +22,7 @@ public:
 private:
     static constexpr int DEFAULT_CAPACITY = 8;
     /**
-     * m_Heap[0] will store the capacity.
+     * m_Heap[0] is left unused.
      */
     int* m_Heap;
     int m_Size;
