@@ -30,10 +30,13 @@ bool isPowerOfTwo(int num) {
     if (num == 1) {
         return true;
     }
-    int l = static_cast<int>(log(num)) + 1;
-    for (int i = 1; i <= l; i++) {
-        if (1 << i == num) {
+    for (int i = 1; i < num; i++) {
+        int pow = 1 << i;
+        if (pow == num) {
             return true;
+        }
+        if (pow > num) {
+            break;
         }
     }
     return false;
