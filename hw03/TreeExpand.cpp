@@ -5,7 +5,7 @@
 #include <iostream>
 
 struct Node {
-    int data;
+    int index;
     int left;
     int right;
 };
@@ -18,7 +18,7 @@ int n;
 int rootIndex = 0;
 
 void preOrder(Node root) {
-    std::cout << root.data << ' ';
+    std::cout << root.index << ' ';
     if (root.left != 0) {
         preOrder(nodes[root.left]);
     }
@@ -37,7 +37,7 @@ int main() {
     }
     for (int i = 1; i <= n; i++) {
         int left, right;
-        std::cin >> nodes[i].data >> left >> right;
+        std::cin >> nodes[i].index >> left >> right;
         nodes[i].left = left;
         nodes[i].right = right;
         isRoot[left] = false;
