@@ -2,9 +2,9 @@
 #include <map>
 #include <queue>
 
-class Encoder {
+class EncoderDecoder {
 public:
-    Encoder() {
+    EncoderDecoder() {
         for (int i = 0; i < ALPHABET_LENGTH; i++) {
             constexpr int w[] = {200, 120, 91, 81, 76, 73, 69, 62, 60, 59, 43, 39, 28, 27, 26, 23, 21, 20, 19, 18, 15, 11, 7, 4, 3, 2, 1};
             weights[letters[i]] = w[i];
@@ -14,8 +14,9 @@ public:
         generateHuffmanCodeMap();
     }
 
-    ~Encoder() {
+    ~EncoderDecoder() {
         deleteNode(huffmanRoot);
+        huffmanRoot = nullptr;
     }
 
     std::string encode(const std::string &message) {
@@ -26,11 +27,28 @@ public:
             }
         }
         result = compress(result);
-        return  result;
+        return result;
+    }
+
+    std::string decode(const std::string &code) const {
+        std::string result;
+        std::string hCode = decompress(code);
+        Node* node = huffmanRoot;
+        for (const char c : hCode) {
+            node = c == '0' ? node->left : node->right;
+            if (node->left == nullptr && node->right == nullptr) {
+                result += node->ch;
+                node = huffmanRoot;
+            }
+        }
+        return result;
     }
 
 private:
     static constexpr int ALPHABET_LENGTH = 27;
+
+    static constexpr char ZERO = '&';
+    static constexpr char ONE = '|';
 
     struct Node {
         char ch;
@@ -113,9 +131,28 @@ private:
                 count++;
                 curr++;
             }
-            result += str[pending] + std::to_string(count);
+            result += str[pending] == '0' ? ZERO : ONE;
+            result += std::to_string(count);
             pending = curr;
             count = 0;
+        }
+        return result;
+    }
+
+    static std::string decompress(const std::string &str) {
+        int pending = 0, curr = 0;
+        std::string result;
+        while (curr < str.length()) {
+            if (str[pending] == ZERO || str[pending] == ONE) {
+                int count = 0;
+                curr = pending + 1;
+                while (curr < str.length() && isdigit(str[curr])) {
+                    count = count * 10 + (str[curr] - '0');
+                    curr++;
+                }
+                result.append(count, str[pending] == ZERO ? '0' : '1');
+            }
+            pending = curr;
         }
         return result;
     }
@@ -129,8 +166,9 @@ public: // These methods are for test-purpose only
 };
 
 int main() {
-    Encoder e;
+    EncoderDecoder e;
     e.printHuffmanMap();
-    std::string code = e.encode("but look at the time");
-    std::cout << code << std::endl;
+    std::string code = e.encode("The quick brown fox jumps over the lazy dog.");
+    std::string message = e.decode(code);
+    std::cout << code << std::endl << message << std::endl;
 }
