@@ -168,7 +168,7 @@ public: // These methods are for test-purpose only
 int main() {
     EncoderDecoder e;
     e.printHuffmanMap();
-    std::string code = e.encode("The quick brown fox jumps over the lazy dog.");
+    std::string code = e.encode("Tech otakus save the world");
     std::string message = e.decode(code);
     std::cout << code << std::endl << message << std::endl;
 }
